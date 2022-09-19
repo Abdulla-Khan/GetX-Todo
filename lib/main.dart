@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_todo/binding/binding.dart';
+import 'package:getx_todo/view/splash_view.dart';
 
 import 'view/home_view.dart';
 
@@ -14,10 +14,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialBinding: ControllerBinding(),
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: SplashScreen(),
     );
   }
 }

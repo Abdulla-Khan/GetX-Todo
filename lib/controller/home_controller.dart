@@ -27,7 +27,8 @@ class HomeController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     tasks.add(taskController.text);
     taskController.clear();
-    prefs.setStringList('tasks', tasks.cast()).obs;
+    await prefs.setStringList('tasks', tasks.cast()).obs;
+    tasks = (prefs.getStringList('tasks') ?? []).obs;
   }
 
   void delete(int index) async {
@@ -45,5 +46,38 @@ class HomeController extends GetxController {
 
     updateController.clear();
     Get.back();
+  }
+
+  void updateDialog(int index) {
+    Get.defaultDialog(
+        title: 'Update Task',
+        content: Column(
+          children: [
+            TextField(
+              controller: updateController,
+              decoration: InputDecoration(
+                  label: Text(
+                    'Update task',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black.withOpacity(0.4)),
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20))),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      updateController.text.isNotEmpty
+                          ? updateTask(index, updateController.text)
+                          : null;
+                    },
+                    child: const Text('Update'))
+              ],
+            )
+          ],
+        ));
   }
 }
