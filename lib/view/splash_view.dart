@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_todo/controller/home_controller.dart';
-import 'package:getx_todo/view/home_view.dart';
+import 'package:getx_todo/controller/splash_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,32 +12,24 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   HomeController controller = Get.put(HomeController());
+  SplashController splashController = Get.put(SplashController());
 
   @override
-  void initState() {
-    super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => HomeView()));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
           child: Obx(
-            () => Container(
-                child: Column(
+            () => Column(
               children: [
-                //  ? Text('')?
                 Text(controller.tasks.isEmpty ? '' : controller.tasks[0]),
-                Icon(
+                const Icon(
                   Icons.home,
                   size: 30,
                 ),
               ],
-            )),
+            ),
           ),
         ));
   }

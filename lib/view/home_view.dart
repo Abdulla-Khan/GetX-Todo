@@ -10,6 +10,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
           backgroundColor: Colors.black.withOpacity(0.1),
           elevation: 0,
@@ -81,7 +82,7 @@ class HomeView extends StatelessWidget {
                       ),
                       Obx(() {
                         return controller.tasks.isEmpty
-                            ? Text('NO')
+                            ? const Text('NO')
                             : ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,

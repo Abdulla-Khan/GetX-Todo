@@ -14,9 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
+      getPages: [
+        GetPage(name: '/home', page: () => const HomeView()),
+        GetPage(name: '/', page: () => const SplashScreen())
+      ],
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      initialRoute: '/',
     );
   }
 }

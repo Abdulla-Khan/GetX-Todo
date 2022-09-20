@@ -1,6 +1,3 @@
-// import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,14 +17,13 @@ class HomeController extends GetxController {
   void loadTask() async {
     final prefs = await SharedPreferences.getInstance();
     tasks = (prefs.getStringList('tasks') ?? []).obs;
-    print(tasks);
   }
 
   void add() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     tasks.add(taskController.text);
     taskController.clear();
-    await prefs.setStringList('tasks', tasks.cast()).obs;
+    prefs.setStringList('tasks', tasks.cast()).obs;
     tasks = (prefs.getStringList('tasks') ?? []).obs;
   }
 
