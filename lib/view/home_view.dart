@@ -4,9 +4,9 @@ import 'package:getx_todo/controller/home_controller.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -82,7 +82,9 @@ class HomeView extends StatelessWidget {
                       ),
                       Obx(() {
                         return controller.tasks.isEmpty
-                            ? const Text('NO')
+                            ? Container(
+                                padding: EdgeInsets.only(top: s.height / 3.5),
+                                child: const Text('NO'))
                             : ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
@@ -90,7 +92,11 @@ class HomeView extends StatelessWidget {
                                 itemBuilder: (ctx, int index) {
                                   return ListTile(
                                     leading: Text('${index + 1}'),
-                                    title: Text(controller.tasks[index]),
+                                    title: GestureDetector(
+                                        onTap: () {
+                                          controller.completed(index);
+                                        },
+                                        child: Text(controller.tasks[index])),
                                     trailing: SizedBox(
                                       width: 100,
                                       child: Row(
