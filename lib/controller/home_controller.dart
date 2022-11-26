@@ -11,7 +11,7 @@ class HomeController extends GetxController {
 
   // List task  = [].obs;
   List tasks = [].obs;
-  List completed_tasks = [].obs;
+  List completedTasks = [].obs;
   TextEditingController taskController = TextEditingController();
   TextEditingController updateController = TextEditingController();
 
@@ -79,8 +79,7 @@ class HomeController extends GetxController {
   }
 
   void completed(index) {
-    completed_tasks.add(tasks[index]);
+    completedTasks.add(tasks[index]);
     tasks.removeAt(index);
-    print(completed_tasks);
   }
 }
